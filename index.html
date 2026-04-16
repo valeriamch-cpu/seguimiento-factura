@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Seguimiento de facturas de clientes</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section id="login-view" class="card login-card">
+        <h1>Control de facturas</h1>
+        <p>Ingresa con tu usuario para ver pendientes, pagos y notificaciones del equipo.</p>
+
+        <form id="login-form" class="form-grid">
+          <label for="username">Usuario</label>
+          <input id="username" name="username" placeholder="Ej: maria" required />
+
+          <label for="password">Contraseña</label>
+          <input id="password" name="password" type="password" placeholder="••••••••" required />
+
+          <button type="submit">Ingresar</button>
+          <p id="login-error" class="error" role="alert"></p>
+        </form>
+      </section>
+
+      <section id="dashboard-view" class="hidden">
+        <header class="topbar card">
+          <div>
+            <h2 id="welcome-title"></h2>
+            <p class="muted">Seguimiento de pendientes, pagos realizados y actividad del equipo.</p>
+          </div>
+          <button id="logout-btn" class="secondary">Salir</button>
+        </header>
+
+        <section class="layout-grid">
+          <article class="card">
+            <h3>Facturas pendientes</h3>
+            <ul id="pending-list" class="invoice-list"></ul>
+          </article>
+
+          <article class="card">
+            <h3 id="selected-invoice-title">Selecciona una factura</h3>
+            <form id="invoice-form" class="form-grid hidden">
+              <label for="proposed-date">Fecha propuesta de pago</label>
+              <input id="proposed-date" name="proposedDate" type="date" />
+
+              <label for="actual-date">Fecha real de pago</label>
+              <input id="actual-date" name="actualDate" type="date" />
+
+              <label for="status">Estado</label>
+              <select id="status" name="status" required>
+                <option value="pendiente">Pendiente</option>
+                <option value="pagada">Pagada</option>
+              </select>
+
+              <label for="comment">Comentario</label>
+              <textarea id="comment" name="comment" rows="3" placeholder="Observaciones de seguimiento"></textarea>
+
+              <button type="submit">Guardar cambios</button>
+            </form>
+          </article>
+
+          <article class="card">
+            <h3>Nueva factura</h3>
+            <form id="new-invoice-form" class="form-grid">
+              <label for="new-client">Cliente</label>
+              <input id="new-client" name="client" required />
+
+              <label for="new-amount">Monto</label>
+              <input id="new-amount" name="amount" type="number" min="0" step="0.01" required />
+
+              <label for="new-proposed-date">Fecha propuesta</label>
+              <input id="new-proposed-date" name="proposedDate" type="date" required />
+
+              <label for="new-comment">Comentario</label>
+              <textarea id="new-comment" name="comment" rows="2" placeholder="Ej: cliente pide extensión"></textarea>
+
+              <button type="submit">Agregar cliente/factura</button>
+            </form>
+          </article>
+        </section>
+
+        <section class="layout-grid bottom-grid">
+          <article class="card">
+            <h3>Todas las facturas</h3>
+            <ul id="all-list" class="invoice-list"></ul>
+          </article>
+
+          <article class="card notifications-card">
+            <h3>Notificaciones del equipo</h3>
+            <div id="live-notification" class="live-notification hidden"></div>
+            <ul id="notification-list" class="notification-list"></ul>
+          </article>
+        </section>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
